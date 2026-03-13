@@ -1,12 +1,12 @@
 (function () {
   var fbConfig = {
-    apiKey:            "BURAYA_API_KEY",
-    authDomain:        "BURAYA_AUTH_DOMAIN",
-    databaseURL:       "BURAYA_DATABASE_URL",
-    projectId:         "BURAYA_PROJECT_ID",
-    storageBucket:     "BURAYA_STORAGE_BUCKET",
-    messagingSenderId: "BURAYA_MESSAGING_SENDER_ID",
-    appId:             "BURAYA_APP_ID"
+    apiKey:            &quot;AIzaSyCRwKe9XdpWfad-cdXs6taAmlJ59zuHXqo&quot;,
+    authDomain:        &quot;rate-e1d98.firebaseapp.com&quot;,
+    databaseURL:       &quot;https://rate-e1d98-default-rtdb.firebaseio.com&quot;,
+    projectId:         &quot;rate-e1d98&quot;,
+    storageBucket:     &quot;rate-e1d98.firebasestorage.app&quot;,
+    messagingSenderId: &quot;420773156620&quot;,
+    appId:             &quot;1:420773156620:web:54c91b19522480352adb29&quot;
   };
 
   var fbMessages = {
