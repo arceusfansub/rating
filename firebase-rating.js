@@ -1,12 +1,12 @@
 (function () {
   var fbConfig = {
-    apiKey:            &quot;AIzaSyCRwKe9XdpWfad-cdXs6taAmlJ59zuHXqo&quot;,
-    authDomain:        &quot;rate-e1d98.firebaseapp.com&quot;,
-    databaseURL:       &quot;https://rate-e1d98-default-rtdb.firebaseio.com&quot;,
-    projectId:         &quot;rate-e1d98&quot;,
-    storageBucket:     &quot;rate-e1d98.firebasestorage.app&quot;,
-    messagingSenderId: &quot;420773156620&quot;,
-    appId:             &quot;1:420773156620:web:54c91b19522480352adb29&quot;
+    apiKey:            "AIzaSyCRwKe9XdpWfad-cdXs6taAmlJ59zuHXqo",
+    authDomain:        "rate-e1d98.firebaseapp.com",
+    databaseURL:       "https://rate-e1d98-default-rtdb.firebaseio.com",
+    projectId:         "rate-e1d98",
+    storageBucket:     "rate-e1d98.firebasestorage.app",
+    messagingSenderId: "420773156620",
+    appId:             "1:420773156620:web:54c91b19522480352adb29"
   };
 
   var fbMessages = {
