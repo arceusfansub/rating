@@ -1,32 +1,12 @@
 (function () {
-  var fbConfig = {
-    apiKey:            "AIzaSyCRwKe9XdpWfad-cdXs6taAmlJ59zuHXqo",
-    authDomain:        "rate-e1d98.firebaseapp.com",
-    databaseURL:       "https://rate-e1d98-default-rtdb.firebaseio.com",
-    projectId:         "rate-e1d98",
-    storageBucket:     "rate-e1d98.firebasestorage.app",
-    messagingSenderId: "420773156620",
-    appId:             "1:420773156620:web:54c91b19522480352adb29"
-  };
+  var cfg = window.fbRatingConfig;
+  if (!cfg) { console.error("fbRatingConfig tanimlanmamis"); return; }
 
-  var fbMessages = {
-    1:  "Paylaştiğin için teşekkürler!",
-    5:  "Yorumunu bırak aşağıya!",
-    10: "Harika seçim!"
-  };
+  var fbMessages = { 1: "Paylastigin icin tesekkurler!", 5: "Yorumunu birak asagiya!", 10: "Harika secim!" };
 
-  function fbGetCookie(n) {
-    var m = document.cookie.match("(^|;)\\s*" + n + "\\s*=\\s*([^;]+)");
-    return m ? m.pop() : null;
-  }
-  function fbSetCookie(n, v) {
-    var x = new Date();
-    x.setTime(x.getTime() + 365 * 864e5);
-    document.cookie = n + "=" + v + ";expires=" + x.toUTCString() + ";path=/;SameSite=Lax";
-  }
-  function fbDelCookie(n) {
-    document.cookie = n + "=;expires=Thu, 01 Jan 1970 00:00:01 UTC;path=/;SameSite=Lax";
-  }
+  function fbGetCookie(n) { var m = document.cookie.match("(^|;)\\s*" + n + "\\s*=\\s*([^;]+)"); return m ? m.pop() : null; }
+  function fbSetCookie(n, v) { var x = new Date(); x.setTime(x.getTime() + 365 * 864e5); document.cookie = n + "=" + v + ";expires=" + x.toUTCString() + ";path=/;SameSite=Lax"; }
+  function fbDelCookie(n) { document.cookie = n + "=;expires=Thu, 01 Jan 1970 00:00:01 UTC;path=/;SameSite=Lax"; }
 
   function fbShowError(msg) {
     document.querySelectorAll("[id^='fbBtns-']").forEach(function (w) {
@@ -35,15 +15,6 @@
       el.textContent = msg;
       el.classList.remove("hidden");
     });
-  }
-
-  function fbConfigValid() {
-    var keys = Object.keys(fbConfig);
-    for (var i = 0; i < keys.length; i++) {
-      if (!fbConfig[keys[i]]) return false;
-      if (fbConfig[keys[i]].indexOf("BURAYA_") !== -1) return false;
-    }
-    return true;
   }
 
   function fbInitWidget(container) {
@@ -69,19 +40,13 @@
         b.style.cursor  = "default";
         if (isIt) b.querySelector(".fbBadge").classList.remove("hidden");
       });
-      msgEl.innerHTML =
-        (fbMessages[voted] || "Oyun alindi!") +
-        " <span style='text-decoration:underline;cursor:pointer' class='fbUndoBtn'>Geri al</span>";
+      msgEl.innerHTML = (fbMessages[voted] || "Oyun alindi!") + " <span style='text-decoration:underline;cursor:pointer' class='fbUndoBtn'>Geri al</span>";
       msgEl.classList.remove("hidden");
       msgEl.querySelector(".fbUndoBtn").onclick = function () { fbRemove(voted); };
     }
 
     function fbClearVoted() {
-      btns.forEach(function (b) {
-        b.style.opacity = "1";
-        b.style.cursor  = "pointer";
-        b.querySelector(".fbBadge").classList.add("hidden");
-      });
+      btns.forEach(function (b) { b.style.opacity = "1"; b.style.cursor = "pointer"; b.querySelector(".fbBadge").classList.add("hidden"); });
       msgEl.classList.add("hidden");
       msgEl.innerHTML = "";
     }
@@ -89,14 +54,8 @@
     function fbRemove(old) {
       dbRef.transaction(function (cur) {
         if (!cur) return { total: 0, count: 0 };
-        return {
-          total: cur.total - old > 0 ? cur.total - old : 0,
-          count: cur.count - 1 > 0 ? cur.count - 1 : 0
-        };
-      }).then(function () {
-        fbDelCookie(cKey);
-        fbClearVoted();
-      });
+        return { total: cur.total - old > 0 ? cur.total - old : 0, count: cur.count - 1 > 0 ? cur.count - 1 : 0 };
+      }).then(function () { fbDelCookie(cKey); fbClearVoted(); });
     }
 
     dbRef.on("value", function (snap) {
@@ -115,19 +74,13 @@
     voteRow.addEventListener("click", function (e) {
       var tgt = e.target.closest(".fbBtn");
       if (!tgt) return;
-      var val     = parseInt(tgt.dataset.value);
+      var val = parseInt(tgt.dataset.value);
       var current = fbGetCookie(cKey);
-      if (current) {
-        if (parseInt(current) === val) fbRemove(val);
-        return;
-      }
+      if (current) { if (parseInt(current) === val) fbRemove(val); return; }
       dbRef.transaction(function (cur) {
         if (!cur) return { total: val, count: 1 };
         return { total: cur.total + val, count: cur.count + 1 };
-      }).then(function () {
-        fbSetCookie(cKey, val);
-        fbApplyVoted(val);
-      });
+      }).then(function () { fbSetCookie(cKey, val); fbApplyVoted(val); });
     });
   }
 
@@ -137,11 +90,7 @@
       setTimeout(function () { fbStart(tries + 1); }, 200);
       return;
     }
-    if (!fbConfigValid()) {
-      fbShowError("Firebase config girilmemis.");
-      return;
-    }
-    if (!firebase.apps.length) firebase.initializeApp(fbConfig);
+    if (!firebase.apps.length) firebase.initializeApp(cfg);
     document.querySelectorAll("[id^='fbBtns-']").forEach(function (c) { fbInitWidget(c); });
   }
 
