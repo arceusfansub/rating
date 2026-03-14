@@ -1,11 +1,11 @@
 (function () {
-  var API_KEY      = "DEGISTIR";
-  var AUTH_DOMAIN  = "DEGISTIR";
-  var DATABASE_URL = "DEGISTIR";
-  var PROJECT_ID   = "DEGISTIR";
-  var STORAGE      = "DEGISTIR";
-  var SENDER_ID    = "DEGISTIR";
-  var APP_ID       = "DEGISTIR";
+  var API_KEY      = "AIzaSyCRwKe9XdpWfad-cdXs6taAmlJ59zuHXqo";
+  var AUTH_DOMAIN  = "rate-e1d98.firebaseapp.com";
+  var DATABASE_URL = "https://rate-e1d98-default-rtdb.firebaseio.com";
+  var PROJECT_ID   = "rate-e1d98";
+  var STORAGE      = "rate-e1d98.firebasestorage.app";
+  var SENDER_ID    = "420773156620";
+  var APP_ID       = "1:420773156620:web:54c91b19522480352adb29";
 
   var MSGS = { 1: "Paylastigin icin tesekkurler!", 5: "Yorumunu birak!", 10: "Harika secim!" };
 
